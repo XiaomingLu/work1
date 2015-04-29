@@ -76,13 +76,13 @@ int get_word(FILE *fp, word_t **p_word)
             if (word == NULL)
                 return MALLOC_ERROR;
             word->str[0] = '\0';
-            int i;
-            for (i = 0; i < MAX_WORD_VALUE_SIZE; ++i)
-                word->value[i] = 0;
+            // int i;
+            // for (i = 0; i < MAX_WORD_VALUE_SIZE; ++i)
+            //     word->value[i] = 0;
         }
         word->str[word_leng] = c;
-        word->value[word_leng/LETTER_PER_INT] += (c - 'a' + 1) << \
-            ((LETTER_PER_INT - word_leng % LETTER_PER_INT - 1) * LETTER_VALUE_BIT);
+        // word->value[word_leng/LETTER_PER_INT] += (c - 'a' + 1) <<
+            // ((LETTER_PER_INT - word_leng % LETTER_PER_INT - 1) * LETTER_VALUE_BIT);
         if (word_leng++ >= MAX_WORD_STR_SIZE - 1) {
             error_num = OVERFLOW_ERROR;
             goto error_handle;
@@ -115,22 +115,22 @@ char letter_to_lowercase(char c)
         return 0;
 }
 
-int word_compare(const word_t *wa, const word_t *wb)
-{
-    int i;
-    for (i = 0; i < MAX_WORD_VALUE_SIZE; ++i)
-    {
-        if (wa->value[i] > wb->value[i])
-            return 1;
-        else if (wa->value[i] < wb->value[i])
-            return -1;
-        else if (wa->value[i] == 0)
-            return 0;
-        else
-            continue;
-    }
-    return 0;
-}
+// int word_compare(const word_t *wa, const word_t *wb)
+// {
+//     int i;
+//     for (i = 0; i < MAX_WORD_VALUE_SIZE; ++i)
+//     {
+//         if (wa->value[i] > wb->value[i])
+//             return 1;
+//         else if (wa->value[i] < wb->value[i])
+//             return -1;
+//         else if (wa->value[i] == 0)
+//             return 0;
+//         else
+//             continue;
+//     }
+//     return 0;
+// }
 
 int add_word(struct list_head *wlist, word_t *word)
 {
@@ -147,7 +147,8 @@ int add_word(struct list_head *wlist, word_t *word)
     } else {
         list_for_each (p, wlist) {
             pos = list_entry(p, wlist_t, list);
-            int cmp_res = word_compare(pos->word, word);
+            // int cmp_res = word_compare(pos->word, word);
+            int cmp_res = strncmp(pos->word->str, word->str, MAX_WORD_STR_SIZE);
             if (cmp_res == 0) {
                 pos->count++;
                 free(word);

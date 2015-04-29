@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "list.h"
 
 #define LETTER_VALUE_BIT        5
@@ -20,7 +21,7 @@
 
 typedef struct {
     char str[MAX_WORD_STR_SIZE];
-    unsigned int value[MAX_WORD_VALUE_SIZE];
+    // unsigned int value[MAX_WORD_VALUE_SIZE];
 }word_t;
 
 typedef struct {
@@ -38,7 +39,7 @@ int print_word_list(FILE *fp, struct list_head *wlist);
 void clear_word_list(struct list_head *wlist);
 
 char letter_to_lowercase(char c);
-int word_compare(const word_t *wa, const word_t *wb);
+// int word_compare(const word_t *wa, const word_t *wb);
 
 
 #endif
